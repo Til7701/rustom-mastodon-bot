@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 futures = "0.3.29"
 megalodon = "0.11.6"
+rand = "0.8.5"
 runtime = "0.0.0"
 serde = "1.0.190"
 serde_derive = "1.0.190"
