@@ -1,8 +1,9 @@
 use std::fs;
-use tokio::runtime;
 
 mod config;
 use crate::config::Config;
+mod mastodon;
+use crate::mastodon::MyMastodonClient;
 
 fn main() {
     let file_path = "config.json";
@@ -18,15 +19,9 @@ fn main() {
     println!("Read config:\n {:?}", config);
 
     let message = String::from("Test Rust");
-    let options = None;
-
-    let client = megalodon::generator(
-        megalodon::SNS::Mastodon,
-        String::from(config.base_url),
-        Some(String::from(config.access_token)),
-        None,
-    );
-    let rt = runtime::Runtime::new().unwrap();
-    let res = rt.block_on(async { client.post_status(message, options).await });
-    println!("{:?}", res);
+    let client = MyMastodonClient {
+        base_url: config.base_url,
+        access_token: config.access_token,
+    };
+    client.publish_status(message);
 }
