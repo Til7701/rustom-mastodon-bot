@@ -1,4 +1,4 @@
-name: "Build"
+name: "Dev Build"
 on:
   push:
     branches:
@@ -26,5 +26,6 @@ jobs:
         file: target/release/rust
         release_name: dev release
         asset_name: rustom-mastodon-bot
+        tag: dev
         overwrite: true
         prerelease: true
