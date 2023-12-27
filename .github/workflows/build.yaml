@@ -1,0 +1,26 @@
+name: "Build"
+on:
+  push:
+    - master
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v18
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - uses: rrbutani/use-nix-shell-action@v1.1.0
+      with:
+        file: ./shell.nix
+        script: |
+          cargo build --release
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2.7.0
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: target/release/rust
+        release_name: dev release
+        asset_name: rustom-mastodon-bot
+        overwrite: true
+        prerelease: true
