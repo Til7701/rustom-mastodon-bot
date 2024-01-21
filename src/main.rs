@@ -8,6 +8,22 @@ mod sentence;
 use crate::sentence::SentenceProvider;
 
 fn main() {
+    let config = get_config();
+
+    //let client = MyMastodonClient {
+    //    base_url: config.base_url,
+    //    access_token: config.access_token,
+    //};
+
+    let provider = SentenceProvider {
+        words_path: config.words_path,
+    };
+    let message = provider.get_random_sentence();
+    println!("created sentence: {:?}", message);
+    //client.publish_status(message)
+}
+
+fn get_config() -> Config {
     let file_path = "config.json";
     println!("Reading config from: {}", file_path);
 
@@ -19,12 +35,5 @@ fn main() {
     };
 
     println!("Read config:\n {:?}", config);
-
-    let client = MyMastodonClient {
-        base_url: config.base_url,
-        access_token: config.access_token,
-    };
-
-    let message = SentenceProvider::get_random_sentence();
-    client.publish_status(message)
+    return config;
 }

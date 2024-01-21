@@ -6,6 +6,7 @@ use serde_derive::Serialize;
 pub struct Config {
     pub base_url: String,
     pub access_token: String,
+    pub words_path: String,
 }
 
 impl Config {

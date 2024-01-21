@@ -1,4 +1,5 @@
 {
     "baseUrl": "https://example.com/",
-    "accessToken": "TOKEN"
+    "accessToken": "TOKEN",
+    "wordsPath": "/path/to/word/lists"
 }
