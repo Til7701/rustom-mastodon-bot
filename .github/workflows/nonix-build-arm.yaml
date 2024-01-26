@@ -10,20 +10,20 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - uses: uraimo/run-on-arch-action@v2
-        name: Run commands
-        id: runcmd
-        with:
-          arch: armv7
-          distro: ubuntu_latest
+    - name: Run commands
+      id: runcmd
+      with:
+        arch: armv7
+        distro: ubuntu_latest
 
-          # Not required, but speeds up builds by storing container images in
-          # a GitHub package registry.
-          githubToken: ${{ github.token }}
+        # Not required, but speeds up builds by storing container images in
+        # a GitHub package registry.
+        githubToken: ${{ github.token }}
 
-          # Set an output parameter `uname` for use in subsequent steps
-          run: |
-            cargo build --release
-            cp target/release/rust /artifacts/rust
+        # Set an output parameter `uname` for use in subsequent steps
+        run: |
+          cargo build --release
+          cp target/release/rust /artifacts/rust
     - name: Build
       run: cargo build --release
     - name: Upload binary to release
