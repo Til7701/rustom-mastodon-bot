@@ -12,15 +12,15 @@ mod pattern_parser;
 fn main() {
     let config = get_config();
 
-    //let client = MyMastodonClient {
-    //    base_url: config.base_url,
-    //    access_token: config.access_token,
-    //};
+    let client = MyMastodonClient {
+        base_url: config.base_url,
+        access_token: config.access_token,
+    };
 
     let provider = SentenceProvider::new(config.words_path);
     let message = provider.get_random_sentence();
     println!("created sentence: {:?}", message);
-    //client.publish_status(message)
+    client.publish_status(message)
 }
 
 fn get_config() -> Config {
