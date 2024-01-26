@@ -22,7 +22,7 @@ jobs:
 
         install: |
           apt-get update -q -y
-          apt-get install -q -y rustc cargo gcc
+          apt-get install -q -y rustc cargo gcc openssl
 
         run: |
           cargo build --release
