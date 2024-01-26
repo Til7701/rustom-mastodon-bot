@@ -6,6 +6,8 @@ mod mastodon;
 use crate::mastodon::MyMastodonClient;
 mod sentence;
 use crate::sentence::SentenceProvider;
+mod io;
+mod pattern_parser;
 
 fn main() {
     let config = get_config();
@@ -15,9 +17,7 @@ fn main() {
     //    access_token: config.access_token,
     //};
 
-    let provider = SentenceProvider {
-        words_path: config.words_path,
-    };
+    let provider = SentenceProvider::new(config.words_path);
     let message = provider.get_random_sentence();
     println!("created sentence: {:?}", message);
     //client.publish_status(message)

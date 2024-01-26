@@ -1,2 +1,2 @@
-Hallo ${german.nouns.all}
-Hello ${english.nouns.all}
+Hallo ${german/nouns/all}
+Hello ${english/nouns/all}
