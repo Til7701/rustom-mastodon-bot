@@ -1,2 +1,3 @@
-Hallo ${german/nouns/all}
-Hello ${english/nouns/all}
+A ${english/adjectives/basic} ${english/nouns/singular} in a ${english/nouns/singular}
+A ${english/nouns/singular} in a ${english/adjectives/basic} ${english/nouns/singular}
+A ${english/adjectives/basic} ${english/nouns/singular} in a ${english/adjectives/basic} ${english/nouns/singular}
