@@ -20,7 +20,10 @@ jobs:
         # a GitHub package registry.
         githubToken: ${{ github.token }}
 
-        # Set an output parameter `uname` for use in subsequent steps
+        install: |
+          apt-get update -q -y
+          apt-get install -q -y rustc cargo gcc
+
         run: |
           cargo build --release
           cp target/release/rust /artifacts/rust
