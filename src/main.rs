@@ -1,7 +1,11 @@
-use std::fs;
+use std::time::{SystemTime, UNIX_EPOCH};
+use std::{fs, thread};
+extern crate chrono;
+extern crate timer;
 
 mod config;
 use crate::config::Config;
+use chrono::DateTime;
 mod mastodon;
 use crate::mastodon::MyMastodonClient;
 mod sentence;
@@ -10,6 +14,25 @@ mod io;
 mod pattern_parser;
 
 fn main() {
+    let timer = timer::Timer::new();
+
+    let _guard = {
+        let now = SystemTime::now();
+        let seconds = now.duration_since(UNIX_EPOCH).unwrap().as_secs();
+        timer.schedule(
+            DateTime::from_timestamp(seconds.try_into().unwrap(), 0).unwrap(),
+            Some(chrono::Duration::hours(24)),
+            move || {
+                println!("Creating and Publishing");
+                create_and_publish();
+            },
+        )
+    };
+    thread::park();
+    println!("end");
+}
+
+fn create_and_publish() {
     let config = get_config();
 
     let client = MyMastodonClient {
